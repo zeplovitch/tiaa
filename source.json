@@ -1,0 +1,80 @@
+{
+  "currentName": "Strategy_2",
+  "priorName": "Strategy_2",
+  "modelType": "S",
+  "modelTargets": [
+    {
+      "currentName": "Model_2",
+      "currentTarget": "50.00%",
+      "priorName": "Model_2",
+      "priorTarget": "50.00%",
+      "modelType": "MM",
+      "modelTargets": [
+        {
+          "currentName": "APPLE INC",
+          "currentTarget": "50.00%",
+          "priorName": "APPLE INC",
+          "priorTarget": "50.00%"
+        },
+        {
+          "currentName": "SubModel_2",
+          "currentTarget": "50.00%",
+          "priorName": "SubModel_2",
+          "priorTarget": "50.00%",
+          "modelType": "MM",
+          "modelTargets": [
+            {
+              "currentName": "FIDELITY SALEM STR TR-INTL SUS PREM",
+              "currentTarget": "50.00%",
+              "priorName": "FIDELITY SALEM STR TR-INTL SUS PREM",
+              "priorTarget": "50.00%"
+            },
+            {
+              "currentName": "METASTAT INC",
+              "currentTarget": "50.00%",
+              "priorName": "METASTAT INC",
+              "priorTarget": "50.00%"
+            }
+          ]
+        },
+        {
+          "currentName": "BARNES GROUP INC",
+          "currentTarget": "50.00%"
+        }
+      ]
+    },
+    {
+      "priorName": "US Dollar",
+      "priorTarget": "50.00%"
+    },
+    {
+      "currentName": "ALIBABA GROUP HLDG LTD-SPONSORED ADS",
+      "currentTarget": "10.00%",
+      "priorName": "ALIBABA GROUP HLDG LTD-SPONSORED ADS",
+      "priorTarget": "10.00%"
+    },
+    {
+      "currentName": "myvestmodel",
+      "currentTarget": "100.00%",
+      "priorName": "myvestmodel",
+      "priorTarget": "100.00%",
+      "modelType": "MM",
+      "modelTargets": [
+        {
+          "currentName": "AGILENT TECHNOLOGIES INC",
+          "currentTarget": "40.00%",
+          "priorName": "AGILENT TECHNOLOGIES INC",
+          "priorTarget": "100.00%"
+        },
+        {
+          "currentName": "BARNES GROUP INC",
+          "currentTarget": "40.00%"
+        },
+        {
+          "currentName": "CITIGROUP INC",
+          "currentTarget": "20.00%"
+        }
+      ]
+    }
+  ]
+}
