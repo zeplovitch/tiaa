@@ -3,7 +3,7 @@ const fs = require('fs');
 const sourceFile='source.json';
 const targetFile='target.json';
 
-class ModelTargetBuilder {
+class ModelTarget {
     constructor(currentName,
                 currentTarget,
                 priorName,
@@ -33,35 +33,38 @@ class ModelTargetBuilder {
         const priorName = modelT.priorName;
         const priorTarget = modelT.priorTarget;
         const modelType = modelT.modelType;
-        const modelTargetBuilder = new ModelTargetBuilder(
+        const modelTarget = new ModelTarget(
                                         currentName,
                                         currentTarget,
                                         priorName,
                                         priorTarget, 
-                                        ModelTargetBuilder.lastID,
+                                        ModelTarget.lastID,
                                         parentId,
                                         modelType);
-        ModelTargetBuilder.modelTargetArr.push(modelTargetBuilder);
-        const lastId= ModelTargetBuilder.lastID;
-        ModelTargetBuilder.lastID++;
-        if(modelT && modelT.modelTargets  ) {
+        ModelTarget.modelTargetArr.push(modelTarget);
+        // we save it so we can send parent
+        const lastId = ModelTarget.lastID;
+        // we mpw add one tp load id 
+        ModelTarget.lastID++;
+        if(modelT && modelT.modelTargets){
             for(const mt of modelT.modelTargets) {
-              ModelTargetBuilder.addModelTarget(mt,lastId);
+              ModelTarget.addModelTarget(mt,lastId);
             }};
         }
 
-      // sets the changed property to true and cslls 
+      // sets the "changed" property to true and cslls 
       // recurssively  to the parent to do the same
 
     static setChecked(parentId){
-        const target = ModelTargetBuilder.modelTargetArr.find(t => t.parentId === parentId);
+        const target = ModelTarget.modelTargetArr.find(t => t.parentId === parentId);
         target.changed = true;
         if (target.parentId && !target.changed){
-            ModelTargetBuilder.setChecked(target.parentId);
+            ModelTarget.setChecked(target.parentId);
         }
     }
 }
-
+    // read function 
+    
 const read = (fileName,cb) => {
     fs.readFile(fileName, 'utf8', (err,data) => {
         if(err) {
@@ -81,23 +84,23 @@ function main(){
               const source = JSON.parse(data);  
 
               // inirialize static array 
-              ModelTargetBuilder.modelTargetArr = []; 
+              ModelTarget.modelTargetArr = []; 
 
               // initialize  id 
-              ModelTargetBuilder.lastID = 2
+              ModelTarget.lastID = 2
 
               // call the builder with root ModelTargets
               for(let modelT of source.modelTargets){
-                ModelTargetBuilder.addModelTarget(modelT);
+                ModelTarget.addModelTarget(modelT);
               };
 
               // traverse up all changed =true and update parent
-               for (let t of ModelTargetBuilder.modelTargetArr.filter(arr => arr.changed)){
-                 ModelTargetBuilder.setChecked(t.parentId);
+               for (let t of ModelTarget.modelTargetArr.filter(arr => arr.changed)){
+                 ModelTarget.setChecked(t.parentId);
                }
 
                // write the file 
-              fs.writeFile(targetFile, JSON.stringify(ModelTargetBuilder.modelTargetArr),err => {
+              fs.writeFile(targetFile, JSON.stringify(ModelTarget.modelTargetArr),err => {
                 console.log('done')
               });
           }
