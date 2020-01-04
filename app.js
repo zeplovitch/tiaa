@@ -65,7 +65,7 @@ class ModelTarget {
 }
     // read function 
     
-const read = (fileName,cb) => {
+const loadFile = (fileName,cb) => {
     fs.readFile(fileName, 'utf8', (err,data) => {
         if(err) {
             cb(err);
@@ -75,9 +75,9 @@ const read = (fileName,cb) => {
 })};
 
 function main(){
-    const res = [];
+
     // read source file
-    read(sourceFile, (err,data) => {
+    loadFile(sourceFile, (err,data) => {
           if(err) {
             console.log(err);
           } else {
@@ -106,5 +106,5 @@ function main(){
           }
     });
 }
-
+// call main
 main();
